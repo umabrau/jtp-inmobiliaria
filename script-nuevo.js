@@ -170,6 +170,31 @@ const listaVentas = document.getElementById("listaVentas");
 // Detectar si estamos en la página de detalle
 const contenidoDetalle = document.getElementById("contenidoDetalle");
 
+// Variables para controlar la galería de fotos
+let fotosDetalleActuales = [];
+let indiceFotoActual = 0;
+
+// Cambiar la foto al tocar las flechas
+function cambiarFotoDetalle(direccion) {
+    if (fotosDetalleActuales.length === 0) return;
+
+    indiceFotoActual += direccion;
+
+    if (indiceFotoActual >= fotosDetalleActuales.length) {
+        indiceFotoActual = 0;
+    }
+
+    if (indiceFotoActual < 0) {
+        indiceFotoActual = fotosDetalleActuales.length - 1;
+    }
+
+    document.getElementById("fotoPrincipalDetalle").src =
+        fotosDetalleActuales[indiceFotoActual];
+
+    document.getElementById("contadorFotos").textContent =
+        `${indiceFotoActual + 1} / ${fotosDetalleActuales.length}`;
+}
+
 // Mostrar una propiedad individual
 function mostrarDetallePropiedad() {
     if (!contenidoDetalle) return;
@@ -187,38 +212,100 @@ function mostrarDetallePropiedad() {
         return;
     }
 
-    const fotos = propiedad.fotos || [propiedad.imagen];
+    fotosDetalleActuales = propiedad.fotos || [propiedad.imagen];
+    indiceFotoActual = 0;
+
+    const esAlquiler = propiedad.operacion === "alquiler";
 
     contenidoDetalle.innerHTML = `
-        <h1>${propiedad.titulo}</h1>
-        <p>${propiedad.ubicacion}</p>
+        <h1 class="titulo-detalle">${propiedad.titulo}</h1>
+        <p class="ubicacion-detalle">${propiedad.ubicacion}</p>
 
-        <div class="galeria-detalle">
-            ${fotos.map(foto => `
-                <img src="${foto}" alt="${propiedad.titulo}">
-            `).join("")}
+        <div class="detalle-superior">
+
+            <div class="galeria-detalle">
+
+                <button class="flecha-galeria anterior" id="fotoAnterior">
+                    &#10094;
+                </button>
+
+                <img
+                    id="fotoPrincipalDetalle"
+                    src="${fotosDetalleActuales[0]}"
+                    alt="${propiedad.titulo}"
+                >
+
+                <button class="flecha-galeria siguiente" id="fotoSiguiente">
+                    &#10095;
+                </button>
+
+                <span id="contadorFotos" class="contador-fotos">
+                    1 / ${fotosDetalleActuales.length}
+                </span>
+
+            </div>
+
+            <div class="precio-detalle">
+
+                <h2>${esAlquiler ? "Precio de alquiler" : "Precio de venta"}</h2>
+
+                <p class="precio">${propiedad.precio}</p>
+
+                ${esAlquiler && propiedad.expensas ? `
+                    <p class="gasto-detalle">
+                        <strong>Expensas:</strong> ${propiedad.expensas}
+                    </p>
+                ` : ""}
+
+                ${esAlquiler && propiedad.absa ? `
+                    <p class="gasto-detalle">
+                        <strong>ABSA:</strong> ${propiedad.absa}
+                    </p>
+                ` : ""}
+
+                ${esAlquiler && propiedad.tasaMunicipal ? `
+                    <p class="gasto-detalle">
+                        <strong>Tasa municipal:</strong> ${propiedad.tasaMunicipal}
+                    </p>
+                ` : ""}
+
+            </div>
+
         </div>
 
-        <h2 class="precio">${propiedad.precio}</h2>
+        <section class="informacion-detalle">
 
-        <p><strong>Ambientes:</strong> ${propiedad.ambientes ?? "Consultar"}</p>
+            <h2>Características de la propiedad</h2>
 
-        <p><strong>Dormitorios:</strong> ${propiedad.dormitorios ?? "Consultar"}</p>
+            <div class="datos-detalle">
+                <p><strong>Ambientes:</strong> ${propiedad.ambientes ?? "Consultar"}</p>
+                <p><strong>Dormitorios:</strong> ${propiedad.dormitorios ?? "Consultar"}</p>
+                <p><strong>Superficie:</strong> ${propiedad.superficie || "Consultar"}</p>
+            </div>
 
-        <p><strong>Superficie:</strong> ${propiedad.superficie || "Consultar"}</p>
+            <p>
+                <strong>Características:</strong>
+                ${(propiedad.caracteristicas || []).join(" · ") || "Consultar"}
+            </p>
 
-        <p><strong>Características:</strong>
-            ${(propiedad.caracteristicas || []).join(" · ") || "Consultar"}
-        </p>
+            <h2>Descripción</h2>
 
-        <h2>Descripción</h2>
-        <p>${propiedad.descripcion || "Consultanos para conocer más detalles."}</p>
+            <p>${propiedad.descripcion || "Consultanos para conocer más detalles."}</p>
+
+        </section>
     `;
+
+    document.getElementById("fotoAnterior").addEventListener("click", () => {
+        cambiarFotoDetalle(-1);
+    });
+
+    document.getElementById("fotoSiguiente").addEventListener("click", () => {
+        cambiarFotoDetalle(1);
+    });
 }
 
 mostrarDetallePropiedad();
 const formulario = document.getElementById("formularioBusqueda");
-
 // Recuperar favoritos guardados
 let favoritos = JSON.parse(localStorage.getItem("favoritosJTP")) || [];
 
@@ -412,3 +499,12 @@ mostrarPropiedades(propiedades);
 
 // Mostrar los favoritos
 mostrarFavoritos();
+// Abrir ventana de contacto
+function abrirContacto() {
+    document.getElementById("ventanaContacto").classList.add("activo");
+}
+
+// Cerrar ventana de contacto
+function cerrarContacto() {
+    document.getElementById("ventanaContacto").classList.remove("activo");
+}
