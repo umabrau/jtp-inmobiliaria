@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi Inmobiliaria</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+   <header class="encabezado">
+    <a href="#" class="marca">
+        <img src="logojtp.png" alt="Logo de JTP" class="logo">
+    </a>
+
+        <nav class="navegacion">
+            <a href="#inicio">Inicio</a>
+            <a href="#propiedades">Propiedades</a>
+            <a href="#mapa">Mapa</a>
+            <a href="favoritos.html">Favoritos </a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="portada" id="inicio">
+            <div class="portada-contenido">
+                <p class="subtitulo">TU PRÓXIMO HOGAR TE ESPERA</p>
+
+                <h1>Encontrá tu próximo lugar.</h1>
+
+                <p class="descripcion">
+                    Casas, departamentos,locales, terrenos y oportunidades
+                    para invertir.
+                </p>
+
+                <form id="formularioBusqueda" class="buscador">
+
+                    <label>
+                        Operación
+                        <select id="operacion">
+                            <option value="todas">Venta y alquiler</option>
+                            <option value="venta">Venta</option>
+                            <option value="alquiler">Alquiler</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Tipo de propiedad
+                        <select id="tipo">
+                            <option value="todos">Todos los tipos</option>
+                            <option value="casa">Casa</option>
+                            <option value="departamento">Departamento</option>
+                            <option value="terreno">Terreno</option>
+                            <option value="local">Local comercial</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Ubicación
+                        <input id="ubicacion"
+                               type="text"
+                               placeholder="Ciudad o barrio">
+                    </label>
+
+                    <button type="submit">Buscar propiedades</button>
+
+                </form>
+            </div>
+        </section>
+<escape><section class="seccion" id="propiedades">
+<p class="subtitulo">NUESTRA SELECCIÓN</p>
+<h2>Propiedades destacadas</h2>
+
+<!-- FILA DE ALQUILERES -->
+<div class="seccion-operacion">
+    <h3>Propiedades en alquiler</h3>
+
+    <div id="listaAlquileres" class="fila-propiedades">
+    </div>
+</div>
+
+<!-- FILA DE VENTAS -->
+<div class="seccion-operacion">
+    <h3>Propiedades en venta</h3>
+
+    <div id="listaVentas" class="fila-propiedades">
+    </div>
+</div>
+
+</section></escape>
+         
+
+        <section class="seccion seccion-mapa" id="mapa">
+            <p class="subtitulo">ENCONTRÁ TU LUGAR</p>
+            <h2>Explorá las propiedades en el mapa</h2>
+            <p>
+                Descubrí dónde se encuentran nuestros inmuebles
+                y encontrá opciones cerca de la zona que te interesa.
+            </p>
+
+            <div id="mapaPropiedades" class="contenedor-mapa">
+                El mapa interactivo se incorporará en el próximo paso.
+            </div>
+        </section>
+
+        <section class="seccion contacto" id="contacto">
+            <h2>¿Estás buscando una propiedad?</h2>
+            <p>Estamos para ayudarte a encontrar la opción ideal.</p>
+            <a href="mailto:contacto@ejemplo.com" class="boton-contacto">
+                Contactanos
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <p>© Mi Inmobiliaria · Todos los derechos reservados</p>
+    </footer>
+
+    <script src="script-nuevo.js"></script>
+
+</body>
+</html>
