@@ -113,9 +113,35 @@
         <section class="seccion contacto" id="contacto">
             <h2>¿Estás buscando una propiedad?</h2>
             <p>Estamos para ayudarte a encontrar la opción ideal.</p>
-            <a href="mailto:contacto@ejemplo.com" class="boton-contacto">
-                Contactanos
-            </a>
+          <button type="button" class="boton-contacto" onclick="abrirContacto()">
+    Contactanos
+</button>
+
+<div id="ventanaContacto" class="fondo-contacto">
+    <div class="cuadro-contacto">
+
+        <button class="cerrar-contacto" onclick="cerrarContacto()" aria-label="Cerrar">
+            &times;
+        </button>
+
+        <h2>¡Estamos para ayudarte!</h2>
+
+        <p>¿Tenés alguna consulta? Escribinos por cualquiera de estos medios:</p>
+
+        <a href="https://wa.me/5492213560012?text=Hola%2C%20quisiera%20hacer%20una%20consulta."
+           target="_blank" rel="noopener noreferrer" class="enlace-contacto whatsapp">
+            <span>WhatsApp</span>
+            <small>Escribinos por WhatsApp</small>
+        </a>
+
+        <a href="https://www.instagram.com/justinatolosapaz/"
+           target="_blank" rel="noopener noreferrer" class="enlace-contacto instagram">
+            <span>Instagram</span>
+            <small>Mandanos un mensaje por Instagram</small>
+        </a>
+
+    </div>
+</div>
         </section>
     </main>
 
