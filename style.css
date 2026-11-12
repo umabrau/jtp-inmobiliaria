@@ -90,7 +90,7 @@ a {
 
 /* PORTADA */
 .portada {
-    background: var(--color-negro);
+    background: #6e6d72;
     color: var(--color-blanco);
     padding: 85px 6%;
 }
